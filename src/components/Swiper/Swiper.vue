@@ -1,5 +1,5 @@
 <template>
-  <div class="swiper-container">
+  <div class="swiper-container" ref = 'swiper'>
       <div class="swiper-wrapper">
           <slot/>
       </div>
@@ -26,7 +26,7 @@ export default {
   mounted () {
     var that = this
     /*eslint-disable*/
-    new Swiper('.swiper-container',{
+    new Swiper(this.$refs.swiper,{
       loop:this.loop,
       autoplay: this.autoplay ? {
         delay: this.autoplay,

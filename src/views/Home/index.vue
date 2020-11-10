@@ -11,7 +11,7 @@
         <div class="header-search"></div>
       </a>
     </header>
-    <Swiper :autoplay = "2000" :loop='false' @change = "changeHandler">
+    <Swiper :autoplay = "2000" :loop='false'>
       <SwiperItem>1</SwiperItem>
       <SwiperItem>2</SwiperItem>
       <SwiperItem>3</SwiperItem>
@@ -22,26 +22,29 @@
 <script>
 
 import { Swiper, SwiperItem } from '@/components/Swiper'
+import { getBanner } from '@/api/cartoon'
 
 export default {
   name: 'Home',
   components: {
     Swiper, SwiperItem
   },
-  methods: {
-    changeHandler (payload) {
-      console.log('index', payload)
-    }
+  created () {
+    getBanner().then(res => {
+      console.log(res)
+    })
   }
 }
 </script>
 
 <style lang='scss' scoped>
+  @import "~@/assets/styles/mixins.scss";
 .page-home{
   display: flex;
   flex-direction: column;
   height: 100%;
   .index-header {
+    @include border-bottom;
     display: flex;
     height: 44px;
     //三者等分平铺
