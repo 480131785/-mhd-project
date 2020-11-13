@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Notify } from 'vant'
 
 const instance = axios.create({
   baseURL: 'http://localhost:8080',
@@ -20,6 +21,7 @@ instance.interceptors.response.use(function (response) {
   return response.data
 }, function (error) {
   // 对响应错误做点什么
+  Notify({ message: '网络异常，请稍后重试', duration: 500 })
   return Promise.reject(error)
 })
 

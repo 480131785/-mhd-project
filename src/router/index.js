@@ -13,6 +13,9 @@ import SearchResult from '../views/SearchResult'
 import Vip from '../views/Vip'
 import Favorite from '../views/Hello/Favorite'
 import History from '../views/Hello/History'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
+nprogress.configure({ showSpinner: false })
 
 Vue.use(VueRouter)
 
@@ -40,4 +43,11 @@ const router = new VueRouter({
   ]
 })
 
+router.beforeEach((to, from, next) => {
+  nprogress.start()
+  next()
+})
+router.afterEach((to, from) => {
+  nprogress.done()
+})
 export default router

@@ -24,7 +24,7 @@ export default {
       this.$router.back()
     },
     goSearch () {
-      this.router.push('/search')
+      this.$router.push('/search')
     }
   }
 }
