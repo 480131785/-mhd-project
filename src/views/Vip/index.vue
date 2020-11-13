@@ -1,5 +1,6 @@
 <template>
   <div class="page-vip">
+    <router-link to = "/city">当前选中城市为：{{$store.getters['city/curCityName']}}</router-link>
     <normal-header title="VIP专区"></normal-header>
     <div class="vip-main">
       <cartoon-list :list="list"></cartoon-list>

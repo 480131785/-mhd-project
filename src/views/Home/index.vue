@@ -1,10 +1,11 @@
 <template>
   <div class="page-home">
+    <router-link to = "/city">当前选中城市为：{{$store.getters['city/curCityName']}}</router-link>
     <index-header></index-header>
     <div class="index-main">
       <Swiper class="my-swiper" v-if="bannerList.length > 0" :autoplay="3000">
         <SwiperItem v-for="item in bannerList" :key="item.id">
-          <img :src="item.imageurl" alt />
+          <img v-lazy="item.imageurl" alt />
         </SwiperItem>
       </Swiper>
       <index-nav></index-nav>
@@ -16,7 +17,7 @@
           href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011202006214"
           target="_blank"
         >
-          <img class="img" src="https://wechatapp.zhuishushenqi.com/mhd/201711/gongan.jpg" />
+          <img class="img" v-lazy="`https://wechatapp.zhuishushenqi.com/mhd/201711/gongan.jpg`" />
           <div>沪公网安备 31011202006214号</div>
         </a>
         <div class="licence">

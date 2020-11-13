@@ -3,8 +3,15 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { Notify } from 'vant'
+import VueLazyload from 'vue-lazyload'
 
 import './assets/styles/base.scss'
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: require('./assets/logo.png'),
+  loading: require('./assets/loading.gif'),
+  attemp: 1
+})
 
 Vue.use(Notify)
 

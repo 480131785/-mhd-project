@@ -1,5 +1,6 @@
 <template>
   <div class="page-ranking">
+    <router-link to = "/city">当前选中城市为：{{$store.getters['city/curCityName']}}</router-link>
     <normal-header title="排行榜"></normal-header>
     <div class="ranking-main">
       <header-type :types = "types" @click = "onChange"></header-type>

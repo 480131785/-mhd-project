@@ -1,20 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../views/Home'
-import Classify from '../views/Classify'
-import Hello from '../views/Hello'
-import Login from '../views/Login'
-import Register from '../views/Resigter'
-import Search from '../views/Search'
-import My from '../views/My'
-import Ranking from '../views/Ranking'
-import SearchResult from '../views/SearchResult'
-import Vip from '../views/Vip'
-import Favorite from '../views/Hello/Favorite'
-import History from '../views/Hello/History'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
+import store from '../store'
+
+const Home = () => import('../views/Home')
+const Classify = () => import('../views/Classify')
+const Hello = () => import('../views/Hello')
+const Login = () => import('../views/Login')
+const Register = () => import('../views/Resigter')
+const Search = () => import('../views/Search')
+const My = () => import('../views/My')
+const Ranking = () => import('../views/Ranking')
+const SearchResult = () => import('../views/SearchResult')
+const Vip = () => import('../views/Vip')
+const Favorite = () => import('../views/Hello/Favorite')
+const History = () => import('../views/Hello/History')
+const City = () => import('../views/City')
 nprogress.configure({ showSpinner: false })
 
 Vue.use(VueRouter)
@@ -39,13 +42,24 @@ const router = new VueRouter({
     { path: '/ranking', component: Ranking },
     { path: '/search-result', component: SearchResult },
     { path: '/vip', component: Vip },
+    { path: '/city', component: City },
     { path: '/', component: Home }
   ]
 })
 
 router.beforeEach((to, from, next) => {
   nprogress.start()
-  next()
+
+  if (!store.state.city.curCity && to.path !== '/city') {
+    next({
+      path: '/city',
+      query: {
+        redirect: to.fullPath
+      }
+    })
+  } else {
+    next()
+  }
 })
 router.afterEach((to, from) => {
   nprogress.done()
